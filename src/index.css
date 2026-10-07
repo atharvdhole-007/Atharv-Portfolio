@@ -1,0 +1,88 @@
+/* ─── Google Fonts ─────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ─── Tailwind v4 ──────────────────────────────────────────────────── */
+@import "tailwindcss";
+
+/* ─── Design Tokens (Tailwind v4 CSS theme) ───────────────────────── */
+@theme {
+  /* Accent: Electric Violet — works great in both light & dark */
+  --color-accent-50:  #f3f0ff;
+  --color-accent-100: #e9e3ff;
+  --color-accent-200: #d5caff;
+  --color-accent-300: #b9a3ff;
+  --color-accent-400: #9670fd;
+  --color-accent-500: #7c3aed;   /* primary accent */
+  --color-accent-600: #6d28d9;
+  --color-accent-700: #5b21b6;
+  --color-accent-800: #4c1d95;
+  --color-accent-900: #3b1873;
+
+  /* Neutral grays */
+  --color-surface-50:  #f8fafc;
+  --color-surface-100: #f1f5f9;
+  --color-surface-200: #e2e8f0;
+  --color-surface-300: #cbd5e1;
+  --color-surface-400: #94a3b8;
+  --color-surface-500: #64748b;
+  --color-surface-600: #475569;
+  --color-surface-700: #334155;
+  --color-surface-800: #1e293b;
+  --color-surface-900: #0f172a;
+  --color-surface-950: #070d1a;
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* ─── Dark mode via .dark class on <html> ─────────────────────────── */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ─── Base styles ─────────────────────────────────────────────────── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-surface-50 text-surface-900 transition-colors duration-300;
+    @apply dark:bg-surface-950 dark:text-surface-100;
+  }
+
+  ::selection {
+    @apply bg-accent-500/30 text-accent-700;
+    @apply dark:bg-accent-500/40 dark:text-accent-200;
+  }
+
+  * {
+    @apply border-surface-200 dark:border-surface-700;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-surface-100 dark:bg-surface-900;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-accent-500/50 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-accent-500;
+  }
+}
+
+/* ─── Utility: gradient accent text ──────────────────────────────── */
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-accent-400 to-accent-600 bg-clip-text text-transparent;
+  }
+  .glass {
+    @apply bg-white/70 dark:bg-surface-800/70 backdrop-blur-md;
+  }
+}
